@@ -17,7 +17,6 @@ public class EmployeePayrollController {
     @Autowired
     IEmployeePayrollService service;
 
-    //ability to display welcome message
     @GetMapping("/employeePayrollService")
     public ResponseEntity<String> getWelcome() {
         return new ResponseEntity<String>(service.getWelcome(), HttpStatus.OK);
@@ -31,7 +30,7 @@ public class EmployeePayrollController {
         return new ResponseEntity<ResponseDTO> (responseDTO,HttpStatus.OK);
     }
 
-    //ability to get all employees' data by findAll() method
+    //ability to get all employees' data by method
     @GetMapping("/employeePayrollService/get")
     public ResponseEntity<List<Employee>> getAllDataFromRepo() {
         return new ResponseEntity<List<Employee>>(service.getAllData(), HttpStatus.OK);
