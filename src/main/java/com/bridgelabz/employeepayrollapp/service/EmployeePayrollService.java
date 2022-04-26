@@ -1,5 +1,6 @@
 package com.bridgelabz.employeepayrollapp.service;
 
+import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.entity.Employee;
 import com.bridgelabz.employeepayrollapp.repository.EmployeePayrollRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     EmployeePayrollRepository repository;
 
 
-    public String getWelcome() {
+    public String getWelcome () {
         return "Welcome to Employee Payroll Application";
     }
 
@@ -32,19 +33,28 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     }
 
     @Override
-    public Optional<Employee> getDataById(Integer id) {
-        Optional<Employee> newEmployee = repository.findById(id);
-        return newEmployee;
+    public Employee getDataById(Integer id) {
+
+        return repository.getById(id);
     }
 
-    public Employee updateDataById(Integer id, Employee employee) {
-        Employee newEmployee = new Employee(id, employee.getFirstName(), employee.getLastName(), employee.getSalary(), employee.getDate());
-        repository.save(newEmployee);
-        return newEmployee;
+    @Override
+    public Employee updateDataById(Integer id, EmployeeDTO employee) {
+        Employee empData = this.getDataById(id);
+        empData.updateDataById(employee);
+        return repository.save(empData);
     }
+
+
+//    public Employee updateDataById(int id, EmployeeDTO employeeDTO) {
+//      //  Employee newEmployee = this.getDataById(id);
+//        Employee employee = this.getDataById(id);
+//        employee.updateDataById(employeeDTO);
+//        return repository.save(newEmployee);;
+//    }
 
     public String deleteDataById(Integer id) {
         repository.deleteById(id);
-        return "Employee with ID:" + id + " got deleted";
+        return "Employee with unique ID:" + id + " got deleted";
     }
 }

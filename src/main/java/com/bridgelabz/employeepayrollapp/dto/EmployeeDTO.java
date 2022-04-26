@@ -6,20 +6,22 @@ public class EmployeeDTO {
     private String firstName;
     private String lastName;
     private Long salary;
-    private String date;
+    private LocalDate date;
+
 
     public EmployeeDTO() {
         super();
     }
 
     public EmployeeDTO(String firstName, String lastName, Long salary,
-                       String date) {
+                       LocalDate date) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.date = date;
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -33,7 +35,7 @@ public class EmployeeDTO {
         return salary;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
