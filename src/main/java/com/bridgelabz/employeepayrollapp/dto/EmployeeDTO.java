@@ -23,17 +23,17 @@ public @ToString class EmployeeDTO {
     private Long salary;
     @JsonFormat(pattern = "yyy MM dd")
     @NotNull(message = "startDate should Not be Empty")
-   // @PastorPresent (message = "startDate should be past or todays date")
+    // @PastorPresent (message = "startDate should be past or todays date")
     private LocalDate date;
 
-    @NotBlank (message = "Note cannot be Empty")
+    @NotBlank(message = "Note cannot be Empty")
     private String note;
 
-    @NotBlank (message = " profilePic cannot be Empty")
+    @NotBlank(message = " profilePic cannot be Empty")
     private String profilePic;
 
-    @NotNull (message = "department should Not be Empty")
-    private List<String> departments;
+    @NotNull(message = "department should Not be Empty")
+    private List<String> department;
 
 
     public EmployeeDTO(String firstName, String lastName, Long salary,
@@ -46,7 +46,11 @@ public @ToString class EmployeeDTO {
         this.gender = gender;
         this.note = note;
         this.profilePic = profilePic;
-        this.departments = departments;
+        this.department = departments;
+    }
+
+    public List<String> getDepartments() {
+        return null;
     }
 
 

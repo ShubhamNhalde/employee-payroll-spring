@@ -5,22 +5,28 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
+@Table(name = "emp_payroll")
 public @Data class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "employee_id")
+    private int employeeId;
     private String firstName;
     private String lastName;
+    @Column(name = "profile_pic" )
     private String profilePic;
-    private String department;
+    @ElementCollection
+    @CollectionTable(name="employee_department",joinColumns= @JoinColumn(name="id"))
+    private List<String> department;
     private Long salary;
     private LocalDate date;
     private String notes;
@@ -31,7 +37,7 @@ public @Data class Employee {
         super();
     }
 
-    public Employee (EmployeeDTO employeeDTO) {
+    public Employee(EmployeeDTO employeeDTO) {
 
         this.firstName = employeeDTO.getFirstName();
         this.lastName = employeeDTO.getLastName();
@@ -43,8 +49,9 @@ public @Data class Employee {
     }
 
     public Employee() {
-        super();
+
     }
+
 
 //    public Integer getId() {
 //        return id;
@@ -96,5 +103,6 @@ public @Data class Employee {
         this.notes = employeeDTO.getNote();
         this.department = employeeDTO.getDepartments();
     }
+
 }
 
