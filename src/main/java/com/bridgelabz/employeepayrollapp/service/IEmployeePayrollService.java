@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IEmployeePayrollService {
 
-     Employee postDataToRepo(Employee employee);
+    Employee postDataToRepo(Employee employee);
 
     List<Employee> getAllData();
 
@@ -15,5 +15,7 @@ public interface IEmployeePayrollService {
 
     Employee updateDataById(Integer id, EmployeeDTO employee);
 
-     String deleteDataById(Integer id);
+    String deleteDataById(Integer id);
+
+    List<Employee> getDataByDepartment(String department);
 }

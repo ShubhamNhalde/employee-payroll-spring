@@ -40,6 +40,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
         } else throw new EmployeePayrollException("Employee id not found");
     }
 
+
     @Override
     public Employee updateDataById(Integer id, EmployeeDTO employee) {
         Employee empData = this.getDataById(id);
@@ -51,5 +52,13 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     public String deleteDataById(Integer id) {
         repository.deleteById(id);
         return null;
+    }
+
+    public List<Employee> getDataByDepartment(String department) {
+        List<Employee> newEmp = repository.findEmployeeByDepartment(department);
+        if (newEmp.isEmpty()) {
+            throw new EmployeePayrollException("Employee Not Found");
+        }
+        return newEmp;
     }
 }

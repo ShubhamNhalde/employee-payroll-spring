@@ -37,7 +37,7 @@ public @ToString class EmployeeDTO {
 
 
     public EmployeeDTO(String firstName, String lastName, Long salary,
-                       LocalDate date, String gender, String note, String profilePic, @NotNull(message = "department should Not be Empty") List<String> departments) {
+                       LocalDate date, String gender, String note, String profilePic,  List<String> departments) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;

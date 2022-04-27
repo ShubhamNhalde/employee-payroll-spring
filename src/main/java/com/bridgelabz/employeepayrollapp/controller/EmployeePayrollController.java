@@ -33,7 +33,7 @@ public class EmployeePayrollController {
     //ability to save employee details to repository
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> saveDataToRepo(@RequestBody Employee employeeDTO) throws EmployeePayrollException {
-       Employee employee = service.postDataToRepo(employeeDTO);
+        Employee employee = service.postDataToRepo(employeeDTO);
         ResponseDTO responseDTO = new ResponseDTO("Created User Successfully", employee);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
@@ -60,5 +60,13 @@ public class EmployeePayrollController {
         service.deleteDataById(id);
         ResponseDTO responseDTO = new ResponseDTO("Deleted Successfully:", id);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/dept/{dept}")
+    public ResponseEntity<ResponseDTO> getDepartment(@PathVariable("dept") String dept) {
+        List<Employee> empDataList = null;
+        empDataList = service.getDataByDepartment(dept);
+        ResponseDTO respDTO = new ResponseDTO("Get Call Success", empDataList);
+        return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
     }
 }
