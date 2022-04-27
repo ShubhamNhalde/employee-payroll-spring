@@ -10,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/employeePayrollService")
@@ -30,10 +31,10 @@ public class EmployeePayrollController {
 
     //ability to save employee details to repository
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> saveDataToRepo(@RequestBody Employee employee) {
-        employee = service.postDataToRepo(employee);
+    public ResponseEntity<ResponseDTO> saveDataToRepo(@RequestBody Employee employeeDTO) {
+       Employee employee = service.postDataToRepo(employeeDTO);
         ResponseDTO responseDTO = new ResponseDTO("Created User Successfully", employee);
-        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     //ability to get employee data by id
@@ -46,7 +47,7 @@ public class EmployeePayrollController {
 
     //ability to update employee data for particular id
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateDataInRepo(@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<String> updateDataInRepo(@PathVariable Integer id, @Valid @RequestBody EmployeeDTO employeeDTO) {
         Employee employee = service.updateDataById(id, employeeDTO);
         ResponseDTO responseDTO = new ResponseDTO("Updating Employee PayrollData Successfully:", employee);
         return new ResponseEntity(employeeDTO, HttpStatus.OK);

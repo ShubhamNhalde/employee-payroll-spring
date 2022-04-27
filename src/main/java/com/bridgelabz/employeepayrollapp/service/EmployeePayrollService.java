@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeePayrollService implements IEmployeePayrollService {
@@ -15,10 +14,6 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     @Autowired
     EmployeePayrollRepository repository;
 
-
-    public String getWelcome () {
-        return "Welcome to Employee Payroll Application";
-    }
 
     @Override
     public Employee postDataToRepo(Employee employee) {
@@ -34,7 +29,6 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
     @Override
     public Employee getDataById(Integer id) {
-
         return repository.getById(id);
     }
 
@@ -46,15 +40,8 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     }
 
 
-//    public Employee updateDataById(int id, EmployeeDTO employeeDTO) {
-//      //  Employee newEmployee = this.getDataById(id);
-//        Employee employee = this.getDataById(id);
-//        employee.updateDataById(employeeDTO);
-//        return repository.save(newEmployee);;
-//    }
-
     public String deleteDataById(Integer id) {
         repository.deleteById(id);
-        return "Employee with unique ID:" + id + " got deleted";
+        return null;
     }
 }

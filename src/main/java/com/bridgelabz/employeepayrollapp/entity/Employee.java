@@ -8,17 +8,16 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Data
-public class Employee {
+public @Data class Employee {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String firstName;
     private String lastName;
     private Long salary;
@@ -30,7 +29,7 @@ public class Employee {
         super();
     }
 
-    public Employee(EmployeeDTO employee) {
+    public Employee (EmployeeDTO employee) {
 
         this.firstName = employee.getFirstName();
         this.lastName = employee.getLastName();
@@ -79,8 +78,11 @@ public class Employee {
 //        this.date = date;
 //    }
 
-    public void updateDataById(EmployeeDTO employeeDTO) {
-        this.updateDataById(employeeDTO);
+    public void updateDataById(EmployeeDTO employee) {
+        this.firstName = employee.getFirstName();
+        this.lastName = employee.getLastName();
+        this.salary = employee.getSalary();
+        this.date = employee.getDate();
     }
 }
 
