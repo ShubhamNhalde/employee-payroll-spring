@@ -1,34 +1,47 @@
 package com.bridgelabz.employeepayrollapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
-public class EmployeeDTO {
+public @ToString class EmployeeDTO {
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Employee firstName is Invalid")
     @NotEmpty(message = "Employee firstName Can't Be Null")
     private String firstName;
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$", message = "Employee lastName is Invalid")
     @NotEmpty(message = "Employee lastName Can't Be Null")
     private String lastName;
+
+    private String gender;
     @Min(value = 500, message = "Salary should be more than 500")
     private Long salary;
-    @PastOrPresent(message = "Date should be past or today date")
+    @JsonFormat(pattern = "yyy MM dd")
     private LocalDate date;
+
+    private String note;
+    private String profilePic;
+    private String departments;
 
 
     public EmployeeDTO(String firstName, String lastName, Long salary,
-                       LocalDate date) {
+                       LocalDate date, String gender, String note, String profilePic, String departments) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
         this.date = date;
+        this.gender = gender;
+        this.note = note;
+        this.profilePic = profilePic;
+        this.departments = departments;
     }
 
 

@@ -17,11 +17,13 @@ import java.time.LocalDate;
 public @Data class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     private String firstName;
     private String lastName;
+    private String profilePic;
+    private String department;
     private Long salary;
     private LocalDate date;
+    private String notes;
 
 
     public Employee(Employee employeeDTO) {
@@ -35,6 +37,9 @@ public @Data class Employee {
         this.lastName = employeeDTO.getLastName();
         this.salary = employeeDTO.getSalary();
         this.date = employeeDTO.getDate();
+        this.profilePic = employeeDTO.getProfilePic();
+        this.notes = employeeDTO.getNote();
+        this.department = employeeDTO.getDepartments();
     }
 
     public Employee() {
@@ -87,6 +92,9 @@ public @Data class Employee {
         this.lastName = employeeDTO.getLastName();
         this.salary = employeeDTO.getSalary();
         this.date = employeeDTO.getDate();
+        this.profilePic = employeeDTO.getProfilePic();
+        this.notes = employeeDTO.getNote();
+        this.department = employeeDTO.getDepartments();
     }
 }
 
