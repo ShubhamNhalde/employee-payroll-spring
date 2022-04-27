@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,19 +17,27 @@ public @ToString class EmployeeDTO {
     @NotEmpty(message = "Employee lastName Can't Be Null")
     private String lastName;
 
+    @Pattern(regexp = "male|female", message = "Gender needs to be male or female")
     private String gender;
     @Min(value = 500, message = "Salary should be more than 500")
     private Long salary;
     @JsonFormat(pattern = "yyy MM dd")
+    @NotNull(message = "startDate should Not be Empty")
+   // @PastorPresent (message = "startDate should be past or todays date")
     private LocalDate date;
 
+    @NotBlank (message = "Note cannot be Empty")
     private String note;
+
+    @NotBlank (message = " profilePic cannot be Empty")
     private String profilePic;
-    private String departments;
+
+    @NotNull (message = "department should Not be Empty")
+    private List<String> departments;
 
 
     public EmployeeDTO(String firstName, String lastName, Long salary,
-                       LocalDate date, String gender, String note, String profilePic, String departments) {
+                       LocalDate date, String gender, String note, String profilePic, @NotNull(message = "department should Not be Empty") List<String> departments) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
