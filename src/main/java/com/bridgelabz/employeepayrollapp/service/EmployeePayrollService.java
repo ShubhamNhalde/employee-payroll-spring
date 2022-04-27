@@ -2,11 +2,13 @@ package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.entity.Employee;
+import com.bridgelabz.employeepayrollapp.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayrollapp.repository.EmployeePayrollRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeePayrollService implements IEmployeePayrollService {
@@ -16,9 +18,10 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
 
     @Override
-    public Employee postDataToRepo(Employee employee) {
-        repository.save(employee);
-        return employee;
+    public Employee postDataToRepo(Employee employeeDTO) {
+       Employee empPost = new Employee(employeeDTO);
+        repository.save(empPost);
+        return empPost;
     }
 
     @Override
@@ -27,9 +30,14 @@ public class EmployeePayrollService implements IEmployeePayrollService {
         return list;
     }
 
+
+
     @Override
     public Employee getDataById(Integer id) {
-        return repository.getById(id);
+        Optional<Employee> newEmployee = repository.findById(id);
+        if (newEmployee.isPresent()) {
+            return newEmployee.get();
+        } else throw new EmployeePayrollException("Employee id not found");
     }
 
     @Override

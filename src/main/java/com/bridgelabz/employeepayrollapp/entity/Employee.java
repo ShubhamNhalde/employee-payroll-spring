@@ -24,17 +24,21 @@ public @Data class Employee {
     private LocalDate date;
 
 
-    public Employee() {
+    public Employee(Employee employeeDTO) {
 
         super();
     }
 
-    public Employee (EmployeeDTO employee) {
+    public Employee (EmployeeDTO employeeDTO) {
 
-        this.firstName = employee.getFirstName();
-        this.lastName = employee.getLastName();
-        this.salary = employee.getSalary();
-        this.date = employee.getDate();
+        this.firstName = employeeDTO.getFirstName();
+        this.lastName = employeeDTO.getLastName();
+        this.salary = employeeDTO.getSalary();
+        this.date = employeeDTO.getDate();
+    }
+
+    public Employee() {
+        super();
     }
 
 //    public Integer getId() {
@@ -78,11 +82,11 @@ public @Data class Employee {
 //        this.date = date;
 //    }
 
-    public void updateDataById(EmployeeDTO employee) {
-        this.firstName = employee.getFirstName();
-        this.lastName = employee.getLastName();
-        this.salary = employee.getSalary();
-        this.date = employee.getDate();
+    public void updateDataById(EmployeeDTO employeeDTO) {
+        this.firstName = employeeDTO.getFirstName();
+        this.lastName = employeeDTO.getLastName();
+        this.salary = employeeDTO.getSalary();
+        this.date = employeeDTO.getDate();
     }
 }
 

@@ -4,6 +4,7 @@ package com.bridgelabz.employeepayrollapp.controller;
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import com.bridgelabz.employeepayrollapp.dto.ResponseDTO;
 import com.bridgelabz.employeepayrollapp.entity.Employee;
+import com.bridgelabz.employeepayrollapp.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayrollapp.service.IEmployeePayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class EmployeePayrollController {
 
     //ability to save employee details to repository
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> saveDataToRepo(@RequestBody Employee employeeDTO) {
+    public ResponseEntity<ResponseDTO> saveDataToRepo(@RequestBody Employee employeeDTO) throws EmployeePayrollException {
        Employee employee = service.postDataToRepo(employeeDTO);
         ResponseDTO responseDTO = new ResponseDTO("Created User Successfully", employee);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
@@ -39,7 +40,7 @@ public class EmployeePayrollController {
 
     //ability to get employee data by id
     @GetMapping("/get/{id}")
-    public ResponseEntity<Employee> getDataFromRepoById(@PathVariable Integer id) {
+    public ResponseEntity<Employee> getDataFromRepoById(@PathVariable Integer id) throws EmployeePayrollException {
         Employee employee = service.getDataById(id);
         ResponseDTO dto = new ResponseDTO("Get Call for Employee by Id", employee);
         return new ResponseEntity(dto, HttpStatus.OK);
@@ -58,6 +59,6 @@ public class EmployeePayrollController {
     public ResponseEntity<ResponseDTO> deleteDataInRepo(@PathVariable Integer id) {
         service.deleteDataById(id);
         ResponseDTO responseDTO = new ResponseDTO("Deleted Successfully:", id);
-        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }
